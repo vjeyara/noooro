@@ -24,7 +24,8 @@ ADHD users churn on overwhelm. The app must not recreate the problem it is meant
 - Configurable durations
 - Start / pause / reset
 - Auto-plays assigned noise during work, pauses on break
-- Soft completion ding + brief screen pulse when a session ends
+- Soft completion bell + brief screen pulse when a session ends (see Sensory feedback)
+- Duration controls render as rotary knobs (drag up/down to change), with tick sound per step
 
 ### Noise (Web Audio API, no external dependencies)
 
@@ -34,6 +35,17 @@ ADHD users churn on overwhelm. The app must not recreate the problem it is meant
 - White noise
 - Volume slider
 - Live waveform canvas while playing
+
+### Sensory feedback (Web Audio API)
+
+Every meaningful action plays a small warm tactile sound — Toss / Daangn / Korean-app style. Not optional polish; it is core to how the app feels and reinforces every action for ADHD brains.
+
+- Tap, knob-click, slider-tick, chip-select cues for all UI controls
+- Distinct cues for Pomodoro start (whoosh), pause (down), resume (up), complete (warm bell), break start (chime)
+- All synthesized via Web Audio API (no audio assets, ~150 lines, shares the AudioContext with the noise generator)
+- Master volume slider + on/off toggle in settings (separate from focus-noise volume)
+- Auto-disabled when `prefers-reduced-motion: reduce` is set
+- See `DESIGN.md` § Sound for the full cue inventory and synthesis parameters
 
 ### Tracking
 
@@ -67,8 +79,8 @@ ADHD users churn on overwhelm. The app must not recreate the problem it is meant
 
 ## Build sequence
 
-1. Visual identity via `ui-ux-pro-max` (palette, typography, vibe)
-2. Build `index.html`
+1. Visual identity via `ui-ux-pro-max` → captured in `DESIGN.md`
+2. Build `index.html` (using `DESIGN.md` tokens)
 3. Verify with `regression-test`
 4. Cleanup pass with `simplify`
 5. Use it for a few days, capture v2 notes
