@@ -71,11 +71,18 @@ Every meaningful action plays a small warm tactile sound — Toss / Daangn / Kor
 
 ## Tech
 
-- Single `index.html` with inline CSS and JS, no build step
-- Web Audio API for noise generation
+- Static deploy: `index.html` + `styles.css` + `src/*.js` modules. No bundler, no build step, no runtime deps beyond fonts.
+- Web Audio API for noise generation and 12 sensory cues
 - localStorage for persistence
-- Canvas for waveform and heatmap
-- Deployable as a static file to noooro.com when ready
+- Canvas for waveform and 30-day heatmap
+- Deployable to noooro.com over HTTPS
+
+## Development
+
+- TDD with Vitest + jsdom on pure logic modules in `src/` (target ≥80% coverage)
+- `npm run dev` starts a local static server for module loading during development
+- Dev deps (`vitest`, `jsdom`, `serve`) live in `node_modules/`, gitignored, never ship
+- Manual golden-path verification + `regression-test` skill after each build phase
 
 ## Build sequence
 

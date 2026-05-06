@@ -1,0 +1,19 @@
+{
+  "name": "noooro",
+  "version": "0.1.0",
+  "description": "Personal-use ADHD focus tool. Pomodoro + Web Audio noise + sensory cues.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "serve -l 5173 .",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^4.1.5",
+    "jsdom": "^29.1.1",
+    "serve": "^14.2.6",
+    "vitest": "^4.1.5"
+  }
+}

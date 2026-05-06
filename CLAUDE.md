@@ -10,7 +10,9 @@ Personal-use ADHD focus tool. Single static HTML file. Pomodoro + Web Audio nois
 
 ## Tech
 
-- Single `index.html` with inline CSS and JS, no build step, no npm
+- **Deploy artifact:** static files (`index.html` + sibling CSS/JS in `src/`), no build step, no bundler. Served over HTTPS at noooro.com.
+- **Dev tooling:** npm + Vitest + jsdom for unit tests, plus `serve` for local module loading. All dev deps live in `node_modules/`, gitignored, never ship.
+- **Local dev:** `npm run dev` starts a static server (ES modules require this; `file://` is blocked by Chrome/Firefox).
 - Web Audio API: noise generation + 12 sensory cues, single shared `AudioContext`
 - localStorage for persistence
 - Canvas for live waveform and 30-day heatmap
@@ -20,7 +22,8 @@ Personal-use ADHD focus tool. Single static HTML file. Pomodoro + Web Audio nois
 ## Hard constraints (do not negotiate)
 
 - Single user only — no login, no cloud, no multi-user code paths
-- No external runtime deps beyond fonts (no React, no Tailwind, no animation libs)
+- No external **runtime** deps beyond fonts in the deployed app (no React, no Tailwind, no animation libs)
+- Dev-time deps (test runner, local server, linter) are fine — they live in `node_modules/` and never ship
 - Default state on app open: focus noise off, 25/5 min Pomodoro, sensory cues on
 - Capacity: ~50 tasks
 - Mobile is not the v1 target (responsive layout welcome, not the focus)
@@ -80,13 +83,33 @@ Export/Import wraps this object as a single JSON file.
 - Disabled when `prefers-reduced-motion: reduce` OR `settings.sensoryEnabled === false`
 - Full cue inventory and synthesis parameters: `DESIGN.md` § Sound
 
-## Testing (after every change to `index.html`)
+## Testing (TDD)
 
-Run `regression-test` skill. Manually verify the four golden paths:
+**Workflow per global rule:** RED → GREEN → REFACTOR. Write the failing test first, then minimal code to pass, then improve.
+
+**Stack:** Vitest + jsdom. `npm test` for watch mode, `npm run test:run` for single run.
+
+**Unit-tested (target ≥80% coverage on pure logic in `src/`):**
+
+- Time formatting (`formatTime`, `parseTime`)
+- Pomodoro state machine (transitions: idle ↔ running ↔ paused ↔ break ↔ complete)
+- Streak calculation from session history
+- Heatmap intensity classification (count → heat-0…heat-4)
+- Daily aggregation (today's Pomodoros, total minutes)
+- Settings validation (workMin ∈ [5,60], breakMin ∈ [1,30])
+
+**E2E only** (verified via `regression-test` skill or manual):
+
+- DOM rendering and event wiring
+- Web Audio synthesis (noise generators, sensory cues)
+- localStorage persistence behavior
+- Drag interactions (rotary knobs, volume slider)
+
+**Manual golden paths to verify after each phase:**
 
 1. Add task → start Pomodoro → noise plays → timer ends → `complete-bell` plays → session logged → today card updates
 2. Pause / resume mid-session — `pause-down` and `resume-up` cues fire, timer state correct
-3. Switch noise type while running — waveform updates, no audio glitch, no double-buffer
+3. Switch noise type while running — waveform updates, no audio glitch
 4. Refresh page → state restored from localStorage, no data loss
 
 ## Deployment
