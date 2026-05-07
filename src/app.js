@@ -153,12 +153,22 @@ function renderToday() {
   if (stats[0]) stats[0].textContent = String(todaySessions.length);
   if (stats[1]) stats[1].textContent = String(totalMin);
 
+  const card = $('.today-card');
+  if (card) card.dataset.empty = todaySessions.length === 0 ? 'true' : 'false';
+
   const streakNum = computeStreak(appState.sessions);
   const streakSpan = $('.streak span');
+  const streakEl = $('.streak');
   if (streakSpan) {
-    streakSpan.textContent =
-      streakNum === 1 ? '1 day streak' : `${streakNum} day streak`;
+    if (streakNum === 0) {
+      streakSpan.textContent = 'Start your first session';
+    } else if (streakNum === 1) {
+      streakSpan.textContent = '1 day streak';
+    } else {
+      streakSpan.textContent = `${streakNum} day streak`;
+    }
   }
+  if (streakEl) streakEl.dataset.empty = streakNum === 0 ? 'true' : 'false';
 }
 
 function computeStreak(sessions) {

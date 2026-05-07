@@ -416,20 +416,23 @@ body.flash {
 }
 
 .stat-value {
-  font-family: var(--font-display);
-  font-size: 48px;
+  font-family: 'DSEG7 Classic', 'Courier New', monospace;
+  font-size: 36px;
   font-weight: 400;
-  font-variation-settings: 'opsz' 96, 'SOFT' 60;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   color: var(--ink);
   line-height: 1;
+  transition: opacity var(--transition);
+}
+
+.today-card[data-empty="true"] .stat-value {
+  opacity: 0.32;
 }
 
 .stat-label {
   font-size: 14px;
   color: var(--ink-soft);
-  margin-top: 6px;
+  margin-top: 8px;
 }
 
 .streak {
@@ -442,6 +445,16 @@ body.flash {
   padding: 6px 14px;
   border-radius: var(--r-pill);
   margin-top: var(--space-base);
+  transition: background-color var(--transition), color var(--transition);
+}
+
+.streak[data-empty="true"] {
+  background: var(--cream-well);
+  color: var(--ink-soft);
+}
+
+.streak[data-empty="true"] .streak-icon {
+  color: var(--ink-mute);
 }
 
 .streak-icon {
