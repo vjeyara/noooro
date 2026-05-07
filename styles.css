@@ -1,4 +1,15 @@
 /* ────────────────────────────────────────────────
+   Casio LCD font (DSEG7 Classic)
+   ──────────────────────────────────────────────── */
+@font-face {
+  font-family: 'DSEG7 Classic';
+  src: url('https://cdn.jsdelivr.net/gh/keshikan/DSEG@v0.46/fonts/DSEG7-Classic/DSEG7Classic-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ────────────────────────────────────────────────
    Noooro — Design tokens (see DESIGN.md)
    ──────────────────────────────────────────────── */
 :root {
@@ -165,15 +176,49 @@ ul { list-style: none; margin: 0; padding: 0; }
   pointer-events: none;
 }
 
+.timer-digits-wrap {
+  position: relative;
+  display: inline-block;
+  line-height: 1;
+}
+
 .timer-digits {
-  font-family: var(--font-display);
-  font-size: clamp(56px, 11vw, 88px);
+  font-family: 'DSEG7 Classic', 'Courier New', monospace;
+  font-size: clamp(48px, 9.5vw, 72px);
   font-weight: 400;
-  font-variation-settings: 'opsz' 144, 'SOFT' 80;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   line-height: 1;
   color: var(--ink);
+  position: relative;
+  z-index: 1;
+}
+
+.timer-digits-ghost {
+  font-family: 'DSEG7 Classic', 'Courier New', monospace;
+  font-size: clamp(48px, 9.5vw, 72px);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1;
+  color: var(--cream-border);
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  user-select: none;
+  pointer-events: none;
+}
+
+.timer-hero[data-status="paused"] .ring-fg { stroke: var(--butter); }
+.timer-hero[data-status="break"] .ring-fg { stroke: var(--lavender); }
+.timer-hero[data-status="running"] .ring-fg { stroke: var(--sage); }
+.timer-hero[data-status="idle"] .ring-fg { stroke: var(--sage); }
+
+@keyframes flash-pulse {
+  0%, 100% { background: var(--cream-bg); }
+  40% { background: var(--peach-soft); }
+}
+
+body.flash {
+  animation: flash-pulse 500ms ease-out;
 }
 
 .timer-task {
