@@ -5,12 +5,9 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "serve -l 5173 .",
+    "dev": "python3 -m http.server 5173",
     "test": "node --test --watch",
     "test:run": "node --test",
     "test:coverage": "node --test --experimental-test-coverage"
-  },
-  "devDependencies": {
-    "serve": "^14.2.6"
   }
 }
