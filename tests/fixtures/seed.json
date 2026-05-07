@@ -1,0 +1,635 @@
+{
+  "tasks": [
+    {
+      "id": "task-01",
+      "title": "Q2 roadmap brief",
+      "noiseType": "brown",
+      "createdAt": 1776297600000
+    },
+    {
+      "id": "task-02",
+      "title": "User interview synthesis",
+      "noiseType": "pink",
+      "createdAt": 1776643200000
+    },
+    {
+      "id": "task-03",
+      "title": "PRD: notifications v2",
+      "noiseType": "brown",
+      "createdAt": 1777161600000
+    },
+    {
+      "id": "task-04",
+      "title": "Slack & email triage",
+      "noiseType": "off",
+      "createdAt": 1774137600000
+    },
+    {
+      "id": "task-05",
+      "title": "Learn SQL window functions",
+      "noiseType": "white",
+      "createdAt": 1777420800000
+    },
+    {
+      "id": "task-06",
+      "title": "Guitar practice",
+      "noiseType": "off",
+      "createdAt": 1773792000000
+    },
+    {
+      "id": "task-07",
+      "title": "Inbox zero (personal)",
+      "noiseType": "pink",
+      "createdAt": 1777766400000
+    },
+    {
+      "id": "task-08",
+      "title": "Tidy workspace & file taxes",
+      "noiseType": "brown",
+      "createdAt": 1777939200000
+    }
+  ],
+  "sessions": [
+    {
+      "id": "session-001",
+      "taskId": "task-02",
+      "startedAt": 1775725440000,
+      "completedAt": 1775726940000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-002",
+      "taskId": "task-01",
+      "startedAt": 1775731500000,
+      "completedAt": 1775733000000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-003",
+      "taskId": "task-07",
+      "startedAt": 1775733840000,
+      "completedAt": 1775735340000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-004",
+      "taskId": "task-01",
+      "startedAt": 1775751360000,
+      "completedAt": 1775752860000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-005",
+      "taskId": "task-04",
+      "startedAt": 1775830020000,
+      "completedAt": 1775831520000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-006",
+      "taskId": "task-08",
+      "startedAt": 1775831820000,
+      "completedAt": 1775834820000,
+      "durationMin": 50
+    },
+    {
+      "id": "session-007",
+      "taskId": "task-03",
+      "startedAt": 1776006180000,
+      "completedAt": 1776007680000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-008",
+      "taskId": "task-05",
+      "startedAt": 1776015420000,
+      "completedAt": 1776016920000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-009",
+      "taskId": "task-06",
+      "startedAt": 1776159000000,
+      "completedAt": 1776160500000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-010",
+      "taskId": "task-06",
+      "startedAt": 1776160800000,
+      "completedAt": 1776162300000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-011",
+      "taskId": "task-04",
+      "startedAt": 1776250260000,
+      "completedAt": 1776251760000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-012",
+      "taskId": "task-03",
+      "startedAt": 1776262500000,
+      "completedAt": 1776264000000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-013",
+      "taskId": "task-02",
+      "startedAt": 1776265680000,
+      "completedAt": 1776267180000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-014",
+      "taskId": "task-04",
+      "startedAt": 1776267900000,
+      "completedAt": 1776269400000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-015",
+      "taskId": "task-08",
+      "startedAt": 1776333540000,
+      "completedAt": 1776335040000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-016",
+      "taskId": "task-06",
+      "startedAt": 1776335340000,
+      "completedAt": 1776336840000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-017",
+      "taskId": "task-05",
+      "startedAt": 1776349800000,
+      "completedAt": 1776351300000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-018",
+      "taskId": "task-01",
+      "startedAt": 1776355680000,
+      "completedAt": 1776357180000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-019",
+      "taskId": "task-02",
+      "startedAt": 1776418200000,
+      "completedAt": 1776419700000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-020",
+      "taskId": "task-06",
+      "startedAt": 1776420000000,
+      "completedAt": 1776421500000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-021",
+      "taskId": "task-02",
+      "startedAt": 1776421800000,
+      "completedAt": 1776423300000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-022",
+      "taskId": "task-01",
+      "startedAt": 1776438660000,
+      "completedAt": 1776440160000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-023",
+      "taskId": "task-02",
+      "startedAt": 1776678360000,
+      "completedAt": 1776681360000,
+      "durationMin": 50
+    },
+    {
+      "id": "session-024",
+      "taskId": "task-08",
+      "startedAt": 1776681660000,
+      "completedAt": 1776683160000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-025",
+      "taskId": "task-06",
+      "startedAt": 1776708480000,
+      "completedAt": 1776709980000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-026",
+      "taskId": "task-04",
+      "startedAt": 1776762060000,
+      "completedAt": 1776763560000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-027",
+      "taskId": "task-01",
+      "startedAt": 1776789120000,
+      "completedAt": 1776790620000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-028",
+      "taskId": "task-03",
+      "startedAt": 1776793200000,
+      "completedAt": 1776794700000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-029",
+      "taskId": "task-05",
+      "startedAt": 1776849900000,
+      "completedAt": 1776851400000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-030",
+      "taskId": "task-08",
+      "startedAt": 1776851700000,
+      "completedAt": 1776853200000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-031",
+      "taskId": "task-04",
+      "startedAt": 1776856020000,
+      "completedAt": 1776857520000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-032",
+      "taskId": "task-01",
+      "startedAt": 1776870900000,
+      "completedAt": 1776872400000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-033",
+      "taskId": "task-01",
+      "startedAt": 1776872700000,
+      "completedAt": 1776874200000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-034",
+      "taskId": "task-01",
+      "startedAt": 1776935460000,
+      "completedAt": 1776936960000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-035",
+      "taskId": "task-02",
+      "startedAt": 1776937260000,
+      "completedAt": 1776938760000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-036",
+      "taskId": "task-06",
+      "startedAt": 1776939060000,
+      "completedAt": 1776940560000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-037",
+      "taskId": "task-05",
+      "startedAt": 1776956880000,
+      "completedAt": 1776958380000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-038",
+      "taskId": "task-05",
+      "startedAt": 1777024560000,
+      "completedAt": 1777027560000,
+      "durationMin": 50
+    },
+    {
+      "id": "session-039",
+      "taskId": "task-03",
+      "startedAt": 1777039200000,
+      "completedAt": 1777040700000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-040",
+      "taskId": "task-04",
+      "startedAt": 1777048260000,
+      "completedAt": 1777049760000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-041",
+      "taskId": "task-06",
+      "startedAt": 1777287540000,
+      "completedAt": 1777289040000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-042",
+      "taskId": "task-08",
+      "startedAt": 1777289640000,
+      "completedAt": 1777291140000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-043",
+      "taskId": "task-07",
+      "startedAt": 1777302060000,
+      "completedAt": 1777303560000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-044",
+      "taskId": "task-01",
+      "startedAt": 1777303860000,
+      "completedAt": 1777305360000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-045",
+      "taskId": "task-04",
+      "startedAt": 1777305660000,
+      "completedAt": 1777307160000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-046",
+      "taskId": "task-01",
+      "startedAt": 1777313520000,
+      "completedAt": 1777315020000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-047",
+      "taskId": "task-07",
+      "startedAt": 1777458240000,
+      "completedAt": 1777459740000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-048",
+      "taskId": "task-01",
+      "startedAt": 1777460040000,
+      "completedAt": 1777461540000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-049",
+      "taskId": "task-03",
+      "startedAt": 1777461840000,
+      "completedAt": 1777464840000,
+      "durationMin": 50
+    },
+    {
+      "id": "session-050",
+      "taskId": "task-06",
+      "startedAt": 1777474860000,
+      "completedAt": 1777476360000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-051",
+      "taskId": "task-01",
+      "startedAt": 1777476840000,
+      "completedAt": 1777478340000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-052",
+      "taskId": "task-05",
+      "startedAt": 1777478640000,
+      "completedAt": 1777480140000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-053",
+      "taskId": "task-02",
+      "startedAt": 1777540380000,
+      "completedAt": 1777541880000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-054",
+      "taskId": "task-01",
+      "startedAt": 1777547220000,
+      "completedAt": 1777548720000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-055",
+      "taskId": "task-01",
+      "startedAt": 1777557960000,
+      "completedAt": 1777559460000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-056",
+      "taskId": "task-03",
+      "startedAt": 1777560780000,
+      "completedAt": 1777562280000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-057",
+      "taskId": "task-02",
+      "startedAt": 1777562580000,
+      "completedAt": 1777564080000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-058",
+      "taskId": "task-01",
+      "startedAt": 1777564380000,
+      "completedAt": 1777565880000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-059",
+      "taskId": "task-07",
+      "startedAt": 1777626480000,
+      "completedAt": 1777627980000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-060",
+      "taskId": "task-01",
+      "startedAt": 1777629060000,
+      "completedAt": 1777630560000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-061",
+      "taskId": "task-01",
+      "startedAt": 1777644240000,
+      "completedAt": 1777645740000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-062",
+      "taskId": "task-07",
+      "startedAt": 1777646040000,
+      "completedAt": 1777647540000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-063",
+      "taskId": "task-02",
+      "startedAt": 1777716120000,
+      "completedAt": 1777717620000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-064",
+      "taskId": "task-01",
+      "startedAt": 1777799400000,
+      "completedAt": 1777800900000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-065",
+      "taskId": "task-02",
+      "startedAt": 1777888980000,
+      "completedAt": 1777890480000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-066",
+      "taskId": "task-01",
+      "startedAt": 1777891140000,
+      "completedAt": 1777894140000,
+      "durationMin": 50
+    },
+    {
+      "id": "session-067",
+      "taskId": "task-02",
+      "startedAt": 1777894440000,
+      "completedAt": 1777895940000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-068",
+      "taskId": "task-02",
+      "startedAt": 1777896240000,
+      "completedAt": 1777899240000,
+      "durationMin": 50
+    },
+    {
+      "id": "session-069",
+      "taskId": "task-08",
+      "startedAt": 1777904280000,
+      "completedAt": 1777905780000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-070",
+      "taskId": "task-01",
+      "startedAt": 1777974240000,
+      "completedAt": 1777975740000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-071",
+      "taskId": "task-01",
+      "startedAt": 1777978320000,
+      "completedAt": 1777979820000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-072",
+      "taskId": "task-03",
+      "startedAt": 1777991160000,
+      "completedAt": 1777992660000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-073",
+      "taskId": "task-01",
+      "startedAt": 1778076660000,
+      "completedAt": 1778078160000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-074",
+      "taskId": "task-01",
+      "startedAt": 1778080920000,
+      "completedAt": 1778082420000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-075",
+      "taskId": "task-05",
+      "startedAt": 1778082720000,
+      "completedAt": 1778084220000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-076",
+      "taskId": "task-01",
+      "startedAt": 1778084520000,
+      "completedAt": 1778086020000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-077",
+      "taskId": "task-03",
+      "startedAt": 1778086320000,
+      "completedAt": 1778087820000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-078",
+      "taskId": "task-07",
+      "startedAt": 1778150400000,
+      "completedAt": 1778151900000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-079",
+      "taskId": "task-04",
+      "startedAt": 1778152200000,
+      "completedAt": 1778153700000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-080",
+      "taskId": "task-01",
+      "startedAt": 1778169720000,
+      "completedAt": 1778171220000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-081",
+      "taskId": "task-02",
+      "startedAt": 1778253180000,
+      "completedAt": 1778254680000,
+      "durationMin": 25
+    },
+    {
+      "id": "session-082",
+      "taskId": "task-04",
+      "startedAt": 1778256780000,
+      "completedAt": 1778258280000,
+      "durationMin": 25
+    }
+  ],
+  "settings": {
+    "workMin": 25,
+    "breakMin": 5,
+    "noiseVolume": 0.55,
+    "sensoryVolume": 0.4,
+    "sensoryEnabled": true
+  }
+}
