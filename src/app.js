@@ -81,7 +81,17 @@ function renderTimer() {
 
 function renderTaskTitle() {
   const task = appState.tasks.find((t) => t.id === activeTaskId);
-  $('.timer-task').textContent = task ? task.title : 'Pick a task to start';
+  const el = $('.timer-task');
+  if (task) {
+    el.textContent = task.title;
+    el.dataset.empty = 'false';
+  } else if (appState.tasks.length === 0) {
+    el.textContent = 'Add a task to begin';
+    el.dataset.empty = 'true';
+  } else {
+    el.textContent = 'Pick a task';
+    el.dataset.empty = 'true';
+  }
 }
 
 function renderActionButton() {
