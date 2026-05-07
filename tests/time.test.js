@@ -1,65 +1,66 @@
-import { describe, it, expect } from 'vitest';
+import { test, describe } from 'node:test';
+import assert from 'node:assert/strict';
 import { formatTime, parseTime } from '../src/time.js';
 
 describe('formatTime', () => {
-  it('formats 1500 seconds as 25:00', () => {
-    expect(formatTime(1500)).toBe('25:00');
+  test('formats 1500 seconds as 25:00', () => {
+    assert.equal(formatTime(1500), '25:00');
   });
 
-  it('formats 65 seconds as 01:05', () => {
-    expect(formatTime(65)).toBe('01:05');
+  test('formats 65 seconds as 01:05', () => {
+    assert.equal(formatTime(65), '01:05');
   });
 
-  it('formats 0 seconds as 00:00', () => {
-    expect(formatTime(0)).toBe('00:00');
+  test('formats 0 seconds as 00:00', () => {
+    assert.equal(formatTime(0), '00:00');
   });
 
-  it('formats 5 seconds as 00:05', () => {
-    expect(formatTime(5)).toBe('00:05');
+  test('formats 5 seconds as 00:05', () => {
+    assert.equal(formatTime(5), '00:05');
   });
 
-  it('formats 3599 seconds as 59:59', () => {
-    expect(formatTime(3599)).toBe('59:59');
+  test('formats 3599 seconds as 59:59', () => {
+    assert.equal(formatTime(3599), '59:59');
   });
 
-  it('rejects negative seconds', () => {
-    expect(() => formatTime(-1)).toThrow();
+  test('rejects negative seconds', () => {
+    assert.throws(() => formatTime(-1));
   });
 
-  it('rejects non-integer seconds', () => {
-    expect(() => formatTime(1.5)).toThrow();
+  test('rejects non-integer seconds', () => {
+    assert.throws(() => formatTime(1.5));
   });
 
-  it('rejects non-number input', () => {
-    expect(() => formatTime('25')).toThrow();
+  test('rejects non-number input', () => {
+    assert.throws(() => formatTime('25'));
   });
 });
 
 describe('parseTime', () => {
-  it('parses "25:00" as 1500 seconds', () => {
-    expect(parseTime('25:00')).toBe(1500);
+  test('parses "25:00" as 1500 seconds', () => {
+    assert.equal(parseTime('25:00'), 1500);
   });
 
-  it('parses "01:05" as 65 seconds', () => {
-    expect(parseTime('01:05')).toBe(65);
+  test('parses "01:05" as 65 seconds', () => {
+    assert.equal(parseTime('01:05'), 65);
   });
 
-  it('parses "0:30" as 30 seconds', () => {
-    expect(parseTime('0:30')).toBe(30);
+  test('parses "0:30" as 30 seconds', () => {
+    assert.equal(parseTime('0:30'), 30);
   });
 
-  it('rejects malformed strings', () => {
-    expect(() => parseTime('25')).toThrow();
-    expect(() => parseTime('25:5:5')).toThrow();
-    expect(() => parseTime('abc')).toThrow();
+  test('rejects malformed strings', () => {
+    assert.throws(() => parseTime('25'));
+    assert.throws(() => parseTime('25:5:5'));
+    assert.throws(() => parseTime('abc'));
   });
 
-  it('rejects seconds >= 60', () => {
-    expect(() => parseTime('1:60')).toThrow();
-    expect(() => parseTime('1:99')).toThrow();
+  test('rejects seconds >= 60', () => {
+    assert.throws(() => parseTime('1:60'));
+    assert.throws(() => parseTime('1:99'));
   });
 
-  it('rejects non-string input', () => {
-    expect(() => parseTime(1500)).toThrow();
+  test('rejects non-string input', () => {
+    assert.throws(() => parseTime(1500));
   });
 });

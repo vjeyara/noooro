@@ -79,9 +79,9 @@ Every meaningful action plays a small warm tactile sound — Toss / Daangn / Kor
 
 ## Development
 
-- TDD with Vitest + jsdom on pure logic modules in `src/` (target ≥80% coverage)
+- TDD with Node's built-in test runner (`node --test` + `node:assert/strict`) on pure logic modules in `src/` (target ≥80% coverage)
 - `npm run dev` starts a local static server for module loading during development
-- Dev deps (`vitest`, `jsdom`, `serve`) live in `node_modules/`, gitignored, never ship
+- Only dev dep is `serve` (Node 22+ ships the test runner); lives in `node_modules/`, gitignored, never ships
 - Manual golden-path verification + `regression-test` skill after each build phase
 
 ## Build sequence

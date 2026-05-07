@@ -11,8 +11,9 @@ Personal-use ADHD focus tool. Single static HTML file. Pomodoro + Web Audio nois
 ## Tech
 
 - **Deploy artifact:** static files (`index.html` + sibling CSS/JS in `src/`), no build step, no bundler. Served over HTTPS at noooro.com.
-- **Dev tooling:** npm + Vitest + jsdom for unit tests, plus `serve` for local module loading. All dev deps live in `node_modules/`, gitignored, never ship.
+- **Dev tooling:** Node's built-in test runner (`node --test`) for unit tests, plus `serve` for local module loading. Only one runtime dev dep (`serve`); test runner is bundled with Node 22+.
 - **Local dev:** `npm run dev` starts a static server (ES modules require this; `file://` is blocked by Chrome/Firefox).
+- **Why not Vitest:** tried Vitest 4 first; its worker IPC fails with timeouts on this iCloud-synced path (URL-encoded `%20` and `%7E` characters break the fork/thread channel). `node:test` runs in-process, no IPC, no issue. See `~/.claude/projects/.../memory/project_test_runner.md`.
 - Web Audio API: noise generation + 12 sensory cues, single shared `AudioContext`
 - localStorage for persistence
 - Canvas for live waveform and 30-day heatmap
@@ -87,7 +88,7 @@ Export/Import wraps this object as a single JSON file.
 
 **Workflow per global rule:** RED → GREEN → REFACTOR. Write the failing test first, then minimal code to pass, then improve.
 
-**Stack:** Vitest + jsdom. `npm test` for watch mode, `npm run test:run` for single run.
+**Stack:** `node:test` + `node:assert/strict` (built-in, no deps). `npm test` for watch mode, `npm run test:run` for single run, `npm run test:coverage` for coverage.
 
 **Unit-tested (target ≥80% coverage on pure logic in `src/`):**
 
