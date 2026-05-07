@@ -69,15 +69,29 @@ All colors are warm-shifted (no pure greys, no pure whites, no cool blues). Text
 
 | Role | Font | Source | Why |
 |---|---|---|---|
-| Display (timer digits, headers) | **Fraunces** | Google Fonts (variable) | Warm serif with `SOFT` axis for friendliness. Optical-size axis means timer digits look right at 128px. |
+| **Numbers (timer + stat values)** | **DSEG7 Classic** | self-hosted `assets/DSEG7Classic-Regular.woff2` | 7-segment LCD aesthetic. User direction: "Casio digital watch face." Used for ALL numeric displays (timer digits, today-card stats, streak count). |
+| Display (Fraunces) | **Fraunces** | Google Fonts (variable) | Warm serif. Used for the `noooro` logo and select display headers only. NOT used for numbers. |
 | Body / UI | **Pretendard** | jsdelivr CDN (variable) | Korean+Latin, the de-facto modern Korean app font (Toss, Naver). Warm without being playful. |
-| Fallback | system-ui, sans-serif | — | If CDN fails. |
+| Fallback (numbers) | `'Courier New', monospace` | — | If DSEG7 woff2 fails to load. |
+| Fallback (text) | system-ui, sans-serif | — | If CDN fails. |
 
 ```html
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..700,30..100&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+```
+
+DSEG7 is self-hosted (CDN was 404). Loaded via `@font-face` in `styles.css`:
+
+```css
+@font-face {
+  font-family: 'DSEG7 Classic';
+  src: url('assets/DSEG7Classic-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 ```
 
 ### Scale (16px base)
@@ -91,15 +105,17 @@ All colors are warm-shifted (no pure greys, no pure whites, no cool blues). Text
 | `xl` | 22px | Section headers |
 | `2xl` | 32px | Card display numbers (today card) |
 | `3xl` | 48px | Minor display |
-| `timer` | clamp(80px, 14vw, 128px) | Hero timer digits |
+| `timer` | clamp(56px, 6vw, 72px) | Hero timer digits (DSEG7) — fits 5-char DSEG7 width inside a 300px ring's 294px inner usable area with ~14px each-side margin |
+| `stat` | 48px | Today-card stat numbers (DSEG7) |
 
 ### Usage
 
-- **Body / UI:** Pretendard 400 default, 500 emphasis, 600 strong. 700 sparingly.
-- **Headers:** Fraunces 400, optical-size auto, SOFT axis at 60-80.
-- **Timer digits:** Fraunces, opsz 144, wght 400, SOFT 80, `font-variant-numeric: tabular-nums` so digits don't shift width.
-- **Line height:** 1.5 body, 1.3 headers, 1.0 timer.
-- **Letter-spacing:** -0.01em on Fraunces display sizes for tighter feel; default on body.
+- **Numbers (everywhere):** DSEG7 Classic. Always tabular by nature of the font. Use for timer digits, today-card stats, streak count, sequence counters, weekly counts, heatmap tooltips.
+- **Body / UI:** Pretendard 400 default, 500 emphasis, 600 strong. 700 sparingly. Used for task titles, button labels, chips, notes, captions.
+- **Display headers (logo + section labels):** Fraunces 400, optical-size auto, SOFT axis at 60-80. NOT used for numbers.
+- **Line height:** 1.5 body, 1.3 headers, 1.0 timer/stat numbers.
+- **Letter-spacing:** -0.01em on Fraunces display sizes for tighter feel; default on body; 0 on DSEG7 (the font's native spacing is correct).
+- **DSEG7 ghost effect:** for the timer digits, render an `inset:0; opacity:0.07` overlay showing `88:88` to give the unlit-segments backdrop. Don't apply to today-card stats (they're not framed in a "screen").
 
 ## Spacing & Radius
 

@@ -1,4 +1,4 @@
-const KEY = 'noooro';
+const DEFAULT_KEY = 'noooro';
 
 export function defaultState() {
   return {
@@ -14,9 +14,9 @@ export function defaultState() {
   };
 }
 
-export function loadAll() {
+export function loadAll(key = DEFAULT_KEY) {
   try {
-    const raw = localStorage.getItem(KEY);
+    const raw = localStorage.getItem(key);
     if (!raw) return defaultState();
     const parsed = JSON.parse(raw);
     const def = defaultState();
@@ -30,8 +30,8 @@ export function loadAll() {
   }
 }
 
-export function saveAll(state) {
-  localStorage.setItem(KEY, JSON.stringify(state));
+export function saveAll(state, key = DEFAULT_KEY) {
+  localStorage.setItem(key, JSON.stringify(state));
 }
 
 function makeId() {
