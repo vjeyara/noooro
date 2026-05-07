@@ -138,16 +138,16 @@ ul { list-style: none; margin: 0; padding: 0; }
 
 .timer-ring-wrap {
   position: relative;
-  width: 240px;
-  height: 240px;
+  width: 320px;
+  height: 320px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .timer-ring {
-  width: 240px;
-  height: 240px;
+  width: 320px;
+  height: 320px;
   transform: rotate(-90deg);
 }
 
@@ -184,7 +184,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 
 .timer-digits {
   font-family: 'DSEG7 Classic', 'Courier New', monospace;
-  font-size: clamp(48px, 9.5vw, 72px);
+  font-size: clamp(44px, 8vw, 64px);
   font-weight: 400;
   letter-spacing: 0;
   line-height: 1;
@@ -195,7 +195,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 
 .timer-digits-ghost {
   font-family: 'DSEG7 Classic', 'Courier New', monospace;
-  font-size: clamp(48px, 9.5vw, 72px);
+  font-size: clamp(44px, 8vw, 64px);
   font-weight: 400;
   letter-spacing: 0;
   line-height: 1;
@@ -572,5 +572,5 @@ body.flash {
 @media (max-width: 480px) {
   .app-header { padding: var(--space-base) var(--space-lg); }
   .app-main { padding: 0 var(--space-lg) var(--space-2xl); gap: var(--space-xl); }
-  .timer-ring-wrap, .timer-ring { width: 200px; height: 200px; }
+  .timer-ring-wrap, .timer-ring { width: 240px; height: 240px; }
 }
