@@ -17,11 +17,16 @@ import {
 } from './storage.js';
 import {
   tapSoft,
+  tapWarm,
   startWhoosh,
   pauseDown,
   resumeUp,
   completeBell,
   breakChime,
+  playNoise,
+  stopNoise,
+  setNoiseVolume,
+  getNoiseAnalyser,
   setVolume as setSensoryVolume,
   setEnabled as setSensoryEnabled,
 } from './audio.js';
@@ -278,9 +283,100 @@ function handleRemoveTask(id) {
   render();
 }
 
+// ────────────────────────────────────────────────
+// Focus noise: chips, volume, waveform
+// ────────────────────────────────────────────────
+
+let waveformCanvas = null;
+let waveformCtx = null;
+let waveformAnimating = false;
+let activeNoiseType = 'off';
+
+const NOISE_ACCENT = {
+  off: '#A8B89E',
+  brown: '#D4937B',
+  pink: '#F2C5A0',
+  white: '#9C8E82',
+};
+
+function selectNoise(type) {
+  activeNoiseType = type;
+  $$('.chip[data-noise]').forEach((chip) => {
+    chip.classList.toggle('chip-active', chip.dataset.noise === type);
+  });
+  tapWarm();
+  if (type === 'off') {
+    stopNoise();
+    waveformAnimating = false;
+    if (waveformCtx) {
+      waveformCtx.clearRect(0, 0, waveformCanvas.width, waveformCanvas.height);
+    }
+    return;
+  }
+  playNoise(type);
+  if (!waveformAnimating) {
+    waveformAnimating = true;
+    requestAnimationFrame(drawWaveform);
+  }
+}
+
+function drawWaveform() {
+  if (!waveformAnimating || !waveformCtx) return;
+  const w = waveformCanvas.width;
+  const h = waveformCanvas.height;
+  waveformCtx.clearRect(0, 0, w, h);
+
+  waveformCtx.strokeStyle = 'rgba(156, 142, 130, 0.3)';
+  waveformCtx.lineWidth = 1;
+  waveformCtx.beginPath();
+  waveformCtx.moveTo(0, h / 2);
+  waveformCtx.lineTo(w, h / 2);
+  waveformCtx.stroke();
+
+  const an = getNoiseAnalyser();
+  if (an) {
+    const data = new Uint8Array(an.fftSize);
+    an.getByteTimeDomainData(data);
+    waveformCtx.strokeStyle = NOISE_ACCENT[activeNoiseType] || '#A8B89E';
+    waveformCtx.lineWidth = 1.5;
+    waveformCtx.beginPath();
+    for (let i = 0; i < data.length; i++) {
+      const x = (i / data.length) * w;
+      const y = (data[i] / 255) * h;
+      if (i === 0) waveformCtx.moveTo(x, y);
+      else waveformCtx.lineTo(x, y);
+    }
+    waveformCtx.stroke();
+  }
+  requestAnimationFrame(drawWaveform);
+}
+
+function initNoisePanel() {
+  waveformCanvas = $('.noise-waveform');
+  waveformCtx = waveformCanvas.getContext('2d');
+
+  $$('.chip[data-noise]').forEach((chip) => {
+    chip.addEventListener('click', () => selectNoise(chip.dataset.noise));
+  });
+
+  const slider = $('.noise-volume input[type="range"]');
+  slider.value = String(Math.round(appState.settings.noiseVolume * 100));
+  setNoiseVolume(appState.settings.noiseVolume);
+  slider.addEventListener('input', () => {
+    const v = Number(slider.value) / 100;
+    setNoiseVolume(v);
+    appState = {
+      ...appState,
+      settings: { ...appState.settings, noiseVolume: v },
+    };
+    saveAll(appState);
+  });
+}
+
 function init() {
   $('.timer-action').addEventListener('click', handleAction);
   $('.task-add-btn').addEventListener('click', handleAddTask);
+  initNoisePanel();
   render();
 }
 

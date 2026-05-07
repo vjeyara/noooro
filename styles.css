@@ -315,6 +315,22 @@ body.flash {
   color: var(--ink);
 }
 
+.chip[data-noise="brown"].chip-active {
+  background: var(--terracotta-soft);
+  border-color: transparent;
+  color: var(--ink);
+}
+.chip[data-noise="pink"].chip-active {
+  background: var(--peach-soft);
+  border-color: transparent;
+  color: var(--ink);
+}
+.chip[data-noise="white"].chip-active {
+  background: var(--cream-well);
+  border-color: transparent;
+  color: var(--ink);
+}
+
 /* ────────────────────────────────────────────────
    Noise panel
    ──────────────────────────────────────────────── */

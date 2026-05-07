@@ -1,9 +1,20 @@
-// Web Audio sensory cues. No unit tests — verified E2E in browser.
-// All cues share one AudioContext (lazy-init on first user gesture).
+// Web Audio sensory cues + focus noise playback.
+// Cues are E2E-verified; noise generation is unit-tested in src/noise.js.
+// All sources share one AudioContext (lazy-init on first user gesture).
+
+import {
+  generateWhiteNoise,
+  generatePinkNoise,
+  generateBrownNoise,
+} from './noise.js';
 
 let ctx = null;
 let enabled = true;
 let volume = 0.4;
+let noiseVolume = 0.5;
+let noiseSource = null;
+let noiseGain = null;
+let noiseAnalyser = null;
 
 export function setEnabled(value) {
   enabled = Boolean(value);
@@ -105,4 +116,75 @@ export function completeBell() {
 
 export function breakChime() {
   playOscillator({ type: 'sine', startFreq: 660, durationMs: 500, peak: 0.36 });
+}
+
+export function tapWarm() {
+  playOscillator({ type: 'sine', startFreq: 600, durationMs: 50, peak: 0.22 });
+}
+
+// ────────────────────────────────────────────────
+// Focus noise playback (brown / pink / white loop)
+// Bypasses sensory `enabled` and reduced-motion gates — noise is the
+// user's explicit choice, not an ambient cue.
+// ────────────────────────────────────────────────
+
+export function setNoiseVolume(value) {
+  noiseVolume = Math.max(0, Math.min(1, Number(value) || 0));
+  if (noiseGain) noiseGain.gain.value = noiseVolume;
+}
+
+export function getNoiseAnalyser() {
+  return noiseAnalyser;
+}
+
+export function stopNoise() {
+  if (noiseSource) {
+    try { noiseSource.stop(); } catch {}
+    try { noiseSource.disconnect(); } catch {}
+    noiseSource = null;
+  }
+  if (noiseGain) {
+    try { noiseGain.disconnect(); } catch {}
+    noiseGain = null;
+  }
+  if (noiseAnalyser) {
+    try { noiseAnalyser.disconnect(); } catch {}
+    noiseAnalyser = null;
+  }
+}
+
+export function playNoise(type) {
+  if (type === 'off' || !type) {
+    stopNoise();
+    return;
+  }
+  const c = getCtx();
+  if (!c) return;
+  if (c.state === 'suspended') c.resume().catch(() => {});
+  stopNoise();
+
+  const seconds = 2;
+  const buffer = c.createBuffer(1, c.sampleRate * seconds, c.sampleRate);
+  const channel = buffer.getChannelData(0);
+  let samples;
+  if (type === 'brown') samples = generateBrownNoise(c.sampleRate, seconds);
+  else if (type === 'pink') samples = generatePinkNoise(c.sampleRate, seconds);
+  else samples = generateWhiteNoise(c.sampleRate, seconds);
+  channel.set(samples);
+
+  noiseSource = c.createBufferSource();
+  noiseSource.buffer = buffer;
+  noiseSource.loop = true;
+
+  noiseGain = c.createGain();
+  noiseGain.gain.value = noiseVolume;
+
+  noiseAnalyser = c.createAnalyser();
+  noiseAnalyser.fftSize = 256;
+  noiseAnalyser.smoothingTimeConstant = 0.6;
+
+  noiseSource.connect(noiseGain);
+  noiseGain.connect(noiseAnalyser);
+  noiseAnalyser.connect(c.destination);
+  noiseSource.start();
 }
