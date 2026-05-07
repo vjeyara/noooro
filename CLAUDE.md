@@ -40,9 +40,21 @@ If a "while we're at it" feature appears mid-build, push back and defer to v2. S
 
 1. ✅ Visual identity → `DESIGN.md`
 2. Build `index.html` (using `DESIGN.md` tokens)
-3. Verify with `regression-test` skill after each milestone
+3. After ANY visual change: run `npm run snap` (Playwright headless screenshot to `/tmp/noooro-snap.png`), Read the PNG, verify before committing
 4. Cleanup pass with `simplify` skill
 5. Use it for a few days, capture v2 notes
+
+## Visual validation (MANDATORY)
+
+`npm run snap` is the validation tool for any change that affects rendering: CSS, HTML, fonts, icons, layout, animations. Workflow per change:
+
+1. Make the change
+2. `npm run snap` → outputs `/tmp/noooro-snap.png`
+3. Read the PNG, confirm the change looks right
+4. If wrong: fix and re-snap
+5. Only then commit
+
+Never ship CSS/layout changes and ask the user to verify. I can't see the browser; the snap is how I see.
 
 ## Code style
 

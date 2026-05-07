@@ -8,6 +8,10 @@
     "dev": "python3 -m http.server 5173",
     "test": "node --test --watch",
     "test:run": "node --test",
-    "test:coverage": "node --test --experimental-test-coverage"
+    "test:coverage": "node --test --experimental-test-coverage",
+    "snap": "node scripts/snap.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.59.1"
   }
 }
