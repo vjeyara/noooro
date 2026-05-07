@@ -15,6 +15,16 @@ import {
   removeTask,
   addSession,
 } from './storage.js';
+import {
+  tapSoft,
+  startWhoosh,
+  pauseDown,
+  resumeUp,
+  completeBell,
+  breakChime,
+  setVolume as setSensoryVolume,
+  setEnabled as setSensoryEnabled,
+} from './audio.js';
 
 const RING_LENGTH = 578.05;
 
@@ -209,6 +219,7 @@ function handleAction() {
   if (timerState.status === 'idle') {
     if (!activeTaskId) {
       if (appState.tasks.length === 0) {
+        tapSoft();
         handleAddTask();
         return;
       }
@@ -216,16 +227,20 @@ function handleAction() {
     }
     const workMs = appState.settings.workMin * 60 * 1000;
     timerState = start(timerState, activeTaskId, workMs, Date.now());
+    startWhoosh();
     startTickLoop();
   } else if (timerState.status === 'running') {
     timerState = pause(timerState, Date.now());
+    pauseDown();
     stopTickLoop();
   } else if (timerState.status === 'paused') {
     timerState = resume(timerState, Date.now());
+    resumeUp();
     startTickLoop();
   } else if (timerState.status === 'break') {
     timerState = resetTimer();
     activeTaskId = appState.tasks[0]?.id ?? null;
+    tapSoft();
     stopTickLoop();
   }
   render();
