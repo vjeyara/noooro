@@ -15,6 +15,7 @@ import {
   removeTask,
   addSession,
 } from './storage.js';
+import { buildHeatmapBuckets } from './heatmap.js';
 import {
   tapSoft,
   tapWarm,
@@ -189,12 +190,40 @@ function computeStreak(sessions) {
   return count;
 }
 
+function renderHeatmap() {
+  const grid = $('.heatmap-grid');
+  if (!grid) return;
+  const buckets = buildHeatmapBuckets(appState.sessions, Date.now(), 30);
+  grid.dataset.empty = appState.sessions.length === 0 ? 'true' : 'false';
+
+  if (grid.children.length !== buckets.length) {
+    grid.replaceChildren();
+    for (let i = 0; i < buckets.length; i++) {
+      const cell = document.createElement('div');
+      cell.className = 'heatmap-cell';
+      grid.appendChild(cell);
+    }
+  }
+  buckets.forEach((b, i) => {
+    const cell = grid.children[i];
+    cell.dataset.heat = String(b.heat);
+    const dateLabel = new Date(b.date).toLocaleDateString(undefined, {
+      month: 'short',
+      day: 'numeric',
+    });
+    cell.title = b.count === 0
+      ? `${dateLabel} — no sessions`
+      : `${dateLabel} — ${b.count} Pomodoro${b.count === 1 ? '' : 's'}`;
+  });
+}
+
 function render() {
   renderTimer();
   renderTaskTitle();
   renderActionButton();
   renderTasks();
   renderToday();
+  renderHeatmap();
 }
 
 function startTickLoop() {
