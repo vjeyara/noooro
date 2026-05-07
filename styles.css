@@ -334,9 +334,10 @@ body {
 .middle-col {
   grid-area: middle;
   display: grid;
-  grid-template-rows: 124px 88px 96px auto;
+  grid-template-rows: 124px 92px auto auto;
   gap: 12px;
   min-height: 0;
+  align-content: start;
 }
 
 /* ── Today card ─────────────────────────────── */
@@ -450,11 +451,11 @@ body {
 }
 
 .session-dot {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   background: transparent;
-  border: 1.5px solid var(--cream-border);
+  border: 2px solid var(--cream-border);
   transition: background-color var(--transition), border-color var(--transition);
   position: relative;
 }
@@ -512,6 +513,9 @@ body {
   border-radius: var(--r-lg);
   box-shadow: var(--shadow-soft);
   padding: var(--space-md) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .noise-row {
@@ -519,6 +523,8 @@ body {
   align-items: center;
   gap: var(--space-md);
 }
+
+.noise-row + .noise-row { gap: var(--space-base); }
 
 .noise-chips {
   display: flex;
@@ -554,6 +560,7 @@ body {
 
 .noise-volume-slider {
   flex: 1;
+  min-width: 0;
   -webkit-appearance: none;
   appearance: none;
   height: 6px;
@@ -586,8 +593,8 @@ body {
 
 .noise-waveform {
   flex-shrink: 0;
-  width: 180px;
-  height: 24px;
+  width: 140px;
+  height: 22px;
   border-radius: var(--r-xs);
   background: var(--cream-bg);
 }
@@ -595,16 +602,20 @@ body {
 /* ── Note slot ─────────────────────────────── */
 .note {
   font-size: 14px;
-  color: var(--ink-soft);
+  color: var(--ink);
+  background: var(--peach-soft);
   margin: 0;
-  padding: 0 var(--space-sm);
-  height: 24px;
-  line-height: 24px;
+  padding: 5px 14px;
+  height: 28px;
+  line-height: 18px;
   text-align: center;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  transition: opacity var(--transition);
+  border-radius: var(--r-pill);
+  align-self: center;
+  max-width: 100%;
+  transition: opacity var(--transition), background-color var(--transition);
 }
 
 /* ────────────────────────────────────────────────
@@ -691,22 +702,27 @@ body {
 }
 
 .task {
-  background: transparent;
+  background: var(--cream-bg);
   border: 1px solid transparent;
   border-radius: var(--r-md);
-  padding: 10px 12px;
+  padding: 9px 12px;
   display: flex;
   align-items: center;
-  gap: var(--space-sm);
+  gap: 8px;
   transition: background-color var(--transition), border-color var(--transition);
   cursor: pointer;
 }
 
-.task:hover { border-color: var(--cream-border); }
+.task:hover { border-color: var(--cream-border); background: var(--cream-card); }
 
 .task-active {
   background: var(--sage-soft);
   border-color: var(--sage);
+  box-shadow: 0 0 0 1px var(--sage), var(--shadow-soft);
+}
+
+.task-active .task-title {
+  font-weight: 500;
 }
 
 .task-title {
@@ -720,12 +736,15 @@ body {
 
 .task-count {
   font-family: var(--font-num);
-  font-size: 11px;
+  font-size: 12px;
   color: var(--terracotta);
-  letter-spacing: -0.05em;
-  min-width: 20px;
+  letter-spacing: -0.08em;
+  min-width: 24px;
   text-align: right;
+  flex-shrink: 0;
 }
+
+.task-count:empty { display: none; }
 
 .task-noise {
   font-size: 9px;
@@ -778,16 +797,18 @@ body {
 .task-add-btn:hover { color: var(--ink); }
 
 .tasks-more {
-  background: transparent;
+  background: var(--cream-well);
   border: none;
-  color: var(--ink-mute);
-  font-size: 12px;
-  padding: 4px 0;
+  color: var(--ink-soft);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 6px 12px;
   text-align: center;
-  border-radius: var(--r-sm);
-  transition: color var(--transition);
+  border-radius: var(--r-pill);
+  align-self: center;
+  transition: color var(--transition), background-color var(--transition);
 }
-.tasks-more:hover { color: var(--ink); }
+.tasks-more:hover { color: var(--ink); background: var(--peach-soft); }
 
 /* ────────────────────────────────────────────────
    Heatmap (full-bleed strip)
@@ -818,13 +839,27 @@ body {
   grid-template-columns: repeat(30, 1fr);
   gap: 3px;
   flex: 1;
-  height: 28px;
+  height: 36px;
 }
 
 .heatmap-cell {
-  border-radius: 3px;
+  border-radius: 4px;
   background: var(--heat-0);
   transition: background-color var(--transition);
+  box-shadow: var(--shadow-press);
+  position: relative;
+}
+
+.heatmap-cell[data-heat="1"],
+.heatmap-cell[data-heat="2"],
+.heatmap-cell[data-heat="3"],
+.heatmap-cell[data-heat="4"] {
+  box-shadow: 0 1px 2px rgba(61, 51, 43, 0.06);
+}
+
+.heatmap-cell:last-child {
+  outline: 2px solid var(--terracotta);
+  outline-offset: 1px;
 }
 
 .heatmap-cell[data-heat="1"] { background: var(--heat-1); }
